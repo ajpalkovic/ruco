@@ -9,6 +9,7 @@ require 'ruco/core_ext/range'
 require 'ruco/keyboard'
 require 'ruco/position'
 require 'ruco/history'
+require 'ruco/style_map'
 
 require 'ruco/editor'
 require 'ruco/status_bar'
