@@ -34,7 +34,7 @@ module Ruco
         last = [@selection.last, visible.last].min
         last = last[1] - @scrolled_columns
 
-        mask.add(:reverse, line, first..last)
+        mask.add(:reverse, line, first...last)
       end
 
       mask
