@@ -22,21 +22,22 @@ module Ruco
     end
 
     def color_mask
-      mask = Array.new(@options[:lines])
+      mask = StyleMap.new(@options[:lines])
       return mask unless @selection
 
-      mask.map_with_index do |_,line|
+      @options[:lines].times do |line|
         visible = visible_area(line)
         next unless @selection.overlap?(visible)
 
         first = [@selection.first, visible.first].max
+        first = first[1] - @scrolled_columns
         last = [@selection.last, visible.last].min
+        last = last[1] - @scrolled_columns
 
-        [
-          [first[1]-@scrolled_columns,Curses::A_REVERSE],
-          [last[1]-@scrolled_columns, Curses::A_NORMAL]
-        ]
+        mask.add(:reverse, line, first..last)
       end
+
+      mask
     end
 
     def move(where, *args)
